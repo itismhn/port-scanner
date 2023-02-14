@@ -5,11 +5,11 @@ def input_validation():
             input_option =int(input("[~]Enter Number:"))
             if input_option in [1,2,3]:
                 if input_option==1:
-                    print(1)
+                    option_1()
                 elif input_option==2:
-                    print(2)
+                    option_2()
                 elif input_option==3:
-                    print(3)
+                    option_3()
             else:
                 print('[~]please choose valid option\n')
         except KeyboardInterrupt:
@@ -17,6 +17,14 @@ def input_validation():
         except :
             print('[~]oops! Enter a valid Charecters!\n')
         
+def option_1():
+    print(1)
 
+def option_2():
+    print(2)
 
+def option_3():
+    print(3)
+    
+    
 input_validation()
