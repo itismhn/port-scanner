@@ -12,6 +12,18 @@ def input_validation():
         except :
             print('[~]oops! Enter a valid Charecters!\n')
         
-
-
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
 input_validation()
