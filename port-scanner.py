@@ -2,12 +2,20 @@ import os,socket,sys,time
 from queue import Queue
 import threading
 from datetime import datetime
+import validators
 
 os.system('cls')
 
+def url_validator(host):
+    validation = validators.url(host)
+    if validation:
+        input_validation()
+    else:
+        print("URL is invalid!")
 
 def input_validation():
-    print("[~]Enter 1 for scan [1-1024] ports\n[~]Enter 2 for scan [1-65535] ports\n[~]Enter 3 for scan custom ports")
+    time.sleep(1)
+    print("\n[~]Enter 1 for scan [1-1024] ports\n[~]Enter 2 for scan [1-65535] ports\n[~]Enter 3 for scan custom ports")
     while True:
         try:   
             input_option =int(input("[~]Enter Number:"))
@@ -48,5 +56,6 @@ def option_3():
         return()
     print(input_start,input_end)
     
-    
-input_validation()
+
+host=input("[~]Enter Host:")
+url_validator(host)
