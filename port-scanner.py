@@ -2,16 +2,16 @@ import os,socket,sys,time
 from queue import Queue
 import threading
 from datetime import datetime
-import validators
+import ipaddress
 
 os.system('cls')
 
-def url_validator(host):
-    validation = validators.url(host)
-    if validation:
+def ip_validator(ip):
+    try:
+        address = ipaddress.ip_address(ip)
         input_validation()
-    else:
-        print("URL is invalid!")
+    except ValueError:
+        print("IP address {} is not valid".format(ip)) 
 
 def input_validation():
     time.sleep(1)
@@ -81,5 +81,5 @@ def option_3():
         return()
     print(input_start,input_end)
     
-host=input("[~]Enter Host:")
-url_validator(hos)
+ip=input("[~]Enter Ip:")
+ip_validator(ip)
