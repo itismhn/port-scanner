@@ -34,6 +34,31 @@ def input_validation():
         except :
             print('[~]oops! Enter a valid Charecters!\n')
         
+def scan(num,host,portStart,portEnd):
+    print('starting scan')
+    open_ports=[]
+    if num == 1:
+        portRange=range(1,1025)
+    elif num == 2:
+        portRange=range(1,65536)
+    else:
+        portRange=range(portStart,portEnd+1)
+    for port in portRange:
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as scan:
+                scan.settimeout(1)
+                print(host,port)
+                scan.connect((host, port))
+                open_ports.append(port)
+        except KeyboardInterrupt:
+            print("\n Exiting Program....")
+            break
+        except:
+            pass
+    for port in open_ports:
+            print(f"Port {port} is OPEN on {host}.")
+
+
 
 def option_1():
     print(1)
@@ -56,6 +81,6 @@ def option_3():
         return()
     print(input_start,input_end)
     
-
 host=input("[~]Enter Host:")
 url_validator(host)
+
