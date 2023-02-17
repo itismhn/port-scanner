@@ -82,5 +82,4 @@ def option_3():
     print(input_start,input_end)
     
 host=input("[~]Enter Host:")
-url_validator(host)
-
+url_validator(hos)
