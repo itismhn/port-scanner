@@ -51,8 +51,8 @@ def scan(num,host,portStart,portEnd):
                 scan.connect((host, port))
                 open_ports.append(port)
         except KeyboardInterrupt:
-            print("\n Exiting Program....")
-            break
+            print("\nExiting...")
+            sys.exit()
         except:
             pass
     for port in open_ports:
@@ -61,7 +61,7 @@ def scan(num,host,portStart,portEnd):
 
 
 def option_1():
-    print(1)
+    scan(1,ip,0,0)
 
 def option_2():
     print(2)
