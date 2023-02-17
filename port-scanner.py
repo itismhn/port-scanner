@@ -52,6 +52,8 @@ def scan(num,host,portStart,portEnd):
                 open_ports.append(port)
         except KeyboardInterrupt:
             print("\nExiting...")
+            for port in open_ports:
+                print(f"Port {port} is OPEN on {host}.")
             sys.exit()
         except:
             pass
@@ -64,16 +66,17 @@ def option_1():
     scan(1,ip,0,0)
 
 def option_2():
-    print(2)
+    scan(2,ip,0,0)
 
 def option_3():
-    time.sleep(1)
+    time.sleep(0.8)
     os.system('cls')
     try:   
         input_start =int(input("[~]Enter Start PortNumber:"))
         input_end =int(input("[~]Enter End PortNumber:"))
     except KeyboardInterrupt:
-        return()
+        print("\nExiting...")
+        sys.exit()
     except:
         print('[~]oops! Enter a valid Charecter!\n')
         time.sleep(1)
