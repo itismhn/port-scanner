@@ -79,7 +79,6 @@ def option_3():
         time.sleep(1)
         option_3()
         return()
-    print(input_start,input_end)
-    
+    scan(3,ip,input_start,input_end)    
 ip=input("[~]Enter Ip:")
 ip_validator(ip)
