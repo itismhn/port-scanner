@@ -1,4 +1,4 @@
-import os,socket,sys
+import os,socket,sys,time
 import ipaddress
 
 os.system('cls')
@@ -32,7 +32,7 @@ def input_validation():
             print('[~]oops! Enter a valid Charecters!\n')
         
 def scan(num,host,portStart,portEnd):
-    print('starting scan')
+    print('\nscanning started...\n')
     open_ports=[]
     if num == 1:
         portRange=range(1,1025)
@@ -44,16 +44,17 @@ def scan(num,host,portStart,portEnd):
         try:
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as scan:
                 scan.settimeout(1)
-                print(host,port)
+                print(f"(~)Scanning port {port} on target:{host}")
                 scan.connect((host, port))
                 open_ports.append(port)
         except KeyboardInterrupt:
             print("\nExiting...")
             for port in open_ports:
-                print(f"Port {port} is OPEN on {host}.")
+                print(f"Port {port} is OPEN on {host}")
             sys.exit()
         except:
             pass
+    print('\n')
     for port in open_ports:
             print(f"Port {port} is OPEN on {host}.")
 
