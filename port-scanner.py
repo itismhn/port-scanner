@@ -1,7 +1,4 @@
-import os,socket,sys,time
-from queue import Queue
-import threading
-from datetime import datetime
+import os,socket,sys
 import ipaddress
 
 os.system('cls')
