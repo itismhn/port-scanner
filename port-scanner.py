@@ -3,9 +3,9 @@ import ipaddress
 #v2.2 modules
 from stem import Signal
 from stem.control import Controller
+from urllib.request import urlopen
 
 os.system('cls')
-
 def ip_validator(ip):
     try:
         address = ipaddress.ip_address(ip)
@@ -13,12 +13,32 @@ def ip_validator(ip):
     except ValueError:
         print("IP address {} is not valid".format(ip)) 
 
+#-----tor-----
+
+controller = Controller.from_port(port=9051)
+
+def connectTor():
+    socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5, "127.0.0.1", 9050, True)
+    socket.socket = socks.socksocket
+
+def renewTor():
+    controller.authenticate("123")
+    controller.signal(Signal.NEWNYM)
+
+def showIP():
+    print(urlopen('http://icanhazip.com').read())
+
 def tor_func():
     tor=input("[~]Integrate with TOR [Y/N]:")
+    global tor_flag
     if(tor=='y' or tor=='Y'):
-        print('Y')
-    elif (tor=='n' or tor=='N'):
+        tor_flag=1
         input_validation()
+    elif (tor=='n' or tor=='N'):
+        tor_flag=0
+        input_validation()
+
+#-----tor-----
 
 def input_validation():
     time.sleep(1)
@@ -40,33 +60,37 @@ def input_validation():
             break
         except :
             print('[~]oops! Enter a valid Charecters!\n')
-        
+    
 def scan(num,host,portStart,portEnd):
-    print('\nscanning started...\n')
-    open_ports=[]
-    if num == 1:
-        portRange=range(1,1025)
-    elif num == 2:
-        portRange=range(1,65536)
-    else:
-        portRange=range(portStart,portEnd+1)
-    for port in portRange:
-        try:
-            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as scan:
-                scan.settimeout(1)
-                print(f"(~)Scanning port {port} on target:{host}")
-                scan.connect((host, port))
-                open_ports.append(port)
-        except KeyboardInterrupt:
-            print("\nExiting...")
-            for port in open_ports:
-                print(f"Port {port} is OPEN on {host}")
-            sys.exit()
-        except:
-            pass
-    print('\n')
-    for port in open_ports:
-            print(f"Port {port} is OPEN on {host}.")
+    if (tor_flag==1):
+        pass
+    elif (tor_flag==0):
+
+        print('\nscanning started...\n')
+        open_ports=[]
+        if num == 1:
+            portRange=range(1,1025)
+        elif num == 2:
+            portRange=range(1,65536)
+        else:
+            portRange=range(portStart,portEnd+1)
+        for port in portRange:
+            try:
+                with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as scan:
+                    scan.settimeout(1)
+                    print(f"(~)Scanning port {port} on target:{host}")
+                    scan.connect((host, port))
+                    open_ports.append(port)
+            except KeyboardInterrupt:
+                print("\nExiting...")
+                for port in open_ports:
+                    print(f"Port {port} is OPEN on {host}")
+                sys.exit()
+            except:
+                pass
+        print('\n')
+        for port in open_ports:
+                print(f"Port {port} is OPEN on {host}.")
 
 
 
