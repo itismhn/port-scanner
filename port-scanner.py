@@ -1,5 +1,8 @@
 import os,socket,sys,time
 import ipaddress
+#v2.2 modules
+from stem import Signal
+from stem.control import Controller
 
 os.system('cls')
 
