@@ -1,4 +1,4 @@
-import os,socket,sys,time
+import os,socket,sys,time,socks
 import ipaddress
 #v2.2 modules
 from stem import Signal
@@ -33,6 +33,8 @@ def tor_func():
     global tor_flag
     if(tor=='y' or tor=='Y'):
         tor_flag=1
+        connectTor()
+        renewTor()
         input_validation()
     elif (tor=='n' or tor=='N'):
         tor_flag=0
@@ -60,12 +62,52 @@ def input_validation():
             break
         except :
             print('[~]oops! Enter a valid Charecters!\n')
+
+def tor_scan(num,host,portStart,portEnd):
+    count=0
+    print('\nTor Scan started...\n')
+    open_ports=[]
+    if num == 1:
+        portRange=range(1,1025)
+        tor_end_num=1025
+    elif num == 2:
+        portRange=range(1,65536)
+        tor_end_num=65535
+    else:
+        portRange=range(portStart,portEnd+1)
+        tor_end_num=portEnd
+    for port in portRange:
+        count+=1
+        if count%100==0:
+            renewTor()
+            connectTor()
+            showIP()
+        try:
+            with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as scan:
+                scan.settimeout(1)
+                print(f"(~)Scanning port {port} on target:{host}")
+                scan.connect((host, port))
+                open_ports.append(port)
+        except KeyboardInterrupt:
+                print("\nExiting...")
+                for port in open_ports:
+                    print(f"Port {port} is OPEN on {host}")
+                sys.exit()
+        except:
+            pass
+        print('\n')
+        for port in open_ports:
+            print(f"Port {port} is OPEN on {host}.")
+
+
     
+    
+
+
 def scan(num,host,portStart,portEnd):
     if (tor_flag==1):
-        pass
+        tor_scan(num,host,portStart,portEnd)
     elif (tor_flag==0):
-
         print('\nscanning started...\n')
         open_ports=[]
         if num == 1:
