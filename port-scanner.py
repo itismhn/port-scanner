@@ -6,9 +6,16 @@ os.system('cls')
 def ip_validator(ip):
     try:
         address = ipaddress.ip_address(ip)
-        input_validation()
+        tor_func()
     except ValueError:
         print("IP address {} is not valid".format(ip)) 
+
+def tor_func():
+    tor=input("[~]Integrate with TOR [Y/N]:")
+    if(tor=='y' or tor=='Y'):
+        print('Y')
+    elif (tor=='n' or tor=='N'):
+        input_validation()
 
 def input_validation():
     time.sleep(1)
