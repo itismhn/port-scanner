@@ -1,4 +1,7 @@
-import os,socket,sys,time
+import os
+import sys
+import time
+import socket
 import ipaddress
 
 os.system('cls')
@@ -57,7 +60,6 @@ def scan(num,host,portStart,portEnd):
     print('\n')
     for port in open_ports:
             print(f"Port {port} is OPEN on {host}.")
-
 
 
 def option_1():
