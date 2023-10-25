@@ -1,10 +1,6 @@
-import os
 import sys
-import time
 import socket
 import ipaddress
-
-os.system('cls')
 
 def ip_validator(ip):
     try:
@@ -12,9 +8,7 @@ def ip_validator(ip):
         input_validation()
     except ValueError:
         print("IP address {} is not valid".format(ip)) 
-
 def input_validation():
-    time.sleep(1)
     print("\n[~]Enter 1 for scan [1-1024] ports\n[~]Enter 2 for scan [1-65535] ports\n[~]Enter 3 for scan custom ports")
     while True:
         try:   
@@ -32,8 +26,7 @@ def input_validation():
         except KeyboardInterrupt:
             break
         except :
-            print('[~]oops! Enter a valid Charecters!\n')
-        
+            print('[~]oops! Enter a valid Charecters!\n')        
 def scan(num,host,portStart,portEnd):
     print('\nscanning started...\n')
     open_ports=[]
@@ -60,17 +53,11 @@ def scan(num,host,portStart,portEnd):
     print('\n')
     for port in open_ports:
             print(f"Port {port} is OPEN on {host}.")
-
-
 def option_1():
     scan(1,ip,0,0)
-
 def option_2():
     scan(2,ip,0,0)
-
 def option_3():
-    time.sleep(0.8)
-    os.system('cls')
     try:   
         input_start =int(input("[~]Enter Start PortNumber:"))
         input_end =int(input("[~]Enter End PortNumber:"))
@@ -83,5 +70,3 @@ def option_3():
         option_3()
         return()
     scan(3,ip,input_start,input_end)    
-ip=input("[~]Enter Ip:")
-ip_validator(ip)
